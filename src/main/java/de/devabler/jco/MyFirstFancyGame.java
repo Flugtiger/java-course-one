@@ -19,6 +19,7 @@ public class MyFirstFancyGame {
 
         var y = screen.getTerminalSize().getRows() - 1;
         var x = screen.getTerminalSize().getColumns() / 2;
+        Rakete rakete = null ;
         while (true) {
             bewegung = berechneBewegung(bewegung);
             gegnerX = gegnerX - bewegung;
@@ -30,7 +31,19 @@ public class MyFirstFancyGame {
             }
             if ((eingabe != null) && (eingabe.getKeyType() == KeyType.ArrowRight)) {
                 x = x + 1;
+
             }
+             if ((eingabe != null) && (eingabe.getKeyType() == KeyType.ArrowUp )) {
+               rakete = new Rakete();
+               rakete.x = x ;
+               rakete.y = y -1 ;
+
+             }
+             if (rakete != null ) {
+             textGraphics.putString(rakete.x, rakete.y, " I ") ;
+             rakete.y = rakete.y -1 ;    
+             }
+            
             textGraphics.putString(x, y, " -/\\- ");
             textGraphics.putString(gegnerX, gegnerY, " I--V--I ");
             
