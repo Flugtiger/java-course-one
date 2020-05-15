@@ -20,7 +20,9 @@ public class MyFirstFancyGame {
         var y = screen.getTerminalSize().getRows() - 1;
         var x = screen.getTerminalSize().getColumns() / 2;
         Raketenbauplan rakete = null ;
+        var punkte = 0 ;
         while (true) {
+            textGraphics.putString(0,0, "Punkte: " + punkte);
             bewegung = berechneBewegung(bewegung);
             gegnerX = gegnerX - bewegung;
 
@@ -37,13 +39,19 @@ public class MyFirstFancyGame {
                rakete = new Raketenbauplan();
                rakete.x = x +2 ;
                rakete.y = y -1 ;
+            }
+            if (rakete != null ) {
+                if (rakete.y == gegnerY && rakete.x > gegnerX && rakete.x < gegnerX+8 ) {
+                    punkte = punkte +5 ;
+                }
+                textGraphics.putString(rakete.x, rakete.y, "I") ;
+                var leery = rakete.y +1 ;      
+                textGraphics.putString(rakete.x,leery , " ") ;
+                rakete.y = rakete.y -1 ;
+                if (rakete.y < -1) {
 
-             }
-             if (rakete != null ) {
-                 textGraphics.putString(rakete.x, rakete.y, "I") ;
-                 var leery = rakete.y +1 ;      
-                 textGraphics.putString(rakete.x,leery , " ") ;
-                 rakete.y = rakete.y -1 ;
+                    rakete = null ;
+                }
              }
             
             textGraphics.putString(x, y, " -/\\- ");
